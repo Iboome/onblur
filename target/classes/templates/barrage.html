@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>弹幕实验室--barrage</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <link href="css/barrage.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="ibox">
+        <div class="ibox-title barrage-main">
+            <div class="video">
+                <video src="video/585b348c234d6.mp4" controls="controls" autoplay>
+                你的浏览器不支持HTML5 视频播放!
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <div class="switch">
+                    <div class="onoffswitch">
+                        <input type="checkbox" class="onoffswitch-checkbox" id="barrage_switch">
+                        <label class="onoffswitch-label" for="barrage_switch">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control barrage-text" />
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info" id="send">吐槽</button>
+            </div>
+        </div>
+        <div class="featurette-divider"></div>
+    </div>
+</div>
+</body>
+<script src="js/barrage.js"></script>
+</html>

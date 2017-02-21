@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://v3.bootcss.com/examples/dashboard/ -->
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>新增用户</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/dashboard.css" rel="stylesheet">
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap-table.min.js"></script>
+    <script src="../js/bootstrap-table-mobile.min.js"></script>
+    <script src="../js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../js/layer/layer.js"></script>
+</head>
+<script>
+    $(function () {
+        $(".btn-warning").on("click",function () {
+            parent.closeLayer();
+        });
+
+        $(".btn-info").on("click",function () {
+            var account = $(".account").val();
+            var token = $(".token").val();
+            $.post("/user?method=saveUser",{"account":account,"token":token},function(data){
+                var Data = eval('('+data+')');
+                var result = Data.data;
+                if(result=="success"){
+                    parent.closeLayer();
+                }else{
+                    layer.msg("保存失败!",{icon:5});
+                }
+            });
+        })
+    });
+</script>
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <label class="col-md-2">账号</label>
+            <div class="col-md-4"><input type="text" class="form-control account" /></div>
+        </div>
+        <div class="col-md-12">
+            <label class="col-md-2">密码</label>
+            <div class="col-md-4"><input type="password" class="form-control token" /></div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4" style="text-align: center;margin-top: 20px;">
+                <input type="button" class="btn btn-info" style="margin-right: 30px;" value="提交"/>
+                <input type="button" class="btn btn-warning" value="取消"/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

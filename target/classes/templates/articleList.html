@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://v3.bootcss.com/examples/dashboard/ -->
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>用户管理</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/dashboard.css" rel="stylesheet">
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap-table.min.js"></script>
+    <script src="../js/bootstrap-table-mobile.min.js"></script>
+    <script src="../js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../js/layer/layer.js"></script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <script src="../js/assets/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<script>
+    var selections = [];
+    $(function(){
+        //初始化文章列表数据
+        loadArticleList();
+    })
+    $(function(){
+        var $table = $("#articleList"),
+            $create = $("#addArticle"),
+            $remove=$("#deleteArticle");
+
+        $table.on('check.bs.table uncheck.bs.table ' +
+            'check-all.bs.table uncheck-all.bs.table', function () {
+            $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+            selections = getIdSelections();
+        });
+        //监听新增操作
+        $create.on("click",function(){
+            var title = "新增文章";
+            var url = "/article?method=addArticle";
+            layer.open({
+                type: 2,
+                title: title,
+                area: ['1080px', '550px'],
+                content: url
+            });
+        })
+        //监听删除操作
+        $remove.on("click",function () {
+            var ids = getIdSelections();
+            layer.confirm('确定删除吗?',{btn:['确定','取消']},function(){
+                $.post("/article?method=deleteArticle",{"ids":ids+""},function(data){
+                    var Data = eval('('+data+')');
+                    var result = Data.data;
+                    if("success"==result){
+                        layer.msg('删除成功!',{icon:1});
+                        loadUserList();
+                    }else{
+                        layer.msg('操作失败,请联系管理员!',{icon:2})
+                    }
+                })
+            });
+            $remove.prop('disabled', true);
+        });
+        function getIdSelections() {
+            return $.map($table.bootstrapTable('getSelections'), function (row) {
+                return row.id
+            });
+        }
+    })
+    //数据加载方法
+    function loadArticleList(){
+        $.post("/article?method=loadArticleList",{},function(data){
+            var Data = eval('('+data+')');
+            var list = Data.data;
+            console.log(list);
+            $("#articleList").bootstrapTable('destroy');
+            $("#articleList").bootstrapTable({
+                striped: true,
+                columns: [{
+                    field: 'flag',
+                    checkbox: true,
+                    rowspan: 1,
+                    align: 'center',
+                    valign: 'middle'
+                },{
+                    field:'title',
+                    align: 'center',
+                    title:'标题'
+                },
+                    {
+                        field:'category',
+                        align: 'center',
+                        title:'文章分类'
+                    },
+                    {
+                        field:'user_id',
+                        align: 'center',
+                        title:'作者',
+                        formatter:function(value, row, index){
+                            var date = new Date(value);
+                            return [ date.nick ].join('');
+                        }
+                    },
+                    {
+                        field:'id',
+                        title:'操作',
+                        align: 'center',
+                        events: operateEvents,
+                        formatter: operateFormatter
+                    }],
+                data:list
+
+            })
+        })
+    }
+    function operateFormatter(value, row, index) {
+        return [
+            '<a class="like" href="javascript:void(0)" title="编辑" style="color:#F8AC59">',
+            '<i class="glyphicon glyphicon-edit"></i>',
+            '</a>  '
+        ].join('');
+    }
+    //
+    window.operateEvents = {
+        'click .like': function (e, value, row, index) {
+            var title = "编辑文章";
+            var url = "/article?method=editArticleList&id="+value;
+            layer.open({
+                type: 2,
+                title: title,
+                area: ['420px', '300px'],
+                content: url
+            });
+        }
+    };
+    function closeLayer(){
+        layer.closeAll();
+    }
+</script>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">博云网</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">文章</a></li>
+                <li><a href="#">游戏</a></li>
+                <li><a href="#">用户</a></li>
+                <li><a href="#">设置</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="/user">主页</a></li>
+                <li class="active"><a href="/article/list">文章管理</a></li>
+                <li><a href="/game/list">游戏管理</a></li>
+                <li><a href="/user/list">用户管理</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h2 class="sub-header">文章列表</h2>
+            <div class="row">
+                <div class="example-wrap">
+                    <div class="example">
+                        <div id="toolbar">
+                            <button id="addArticle" class="btn btn-primary">
+                                <i class="glyphicon glyphicon-plus"></i> 新增
+                            </button>
+                            <button id="deleteArticle" class="btn btn-danger" disabled>
+                                <i class="glyphicon glyphicon-remove"></i> 删除
+                            </button>
+                        </div>
+                        <table id="articleList"
+                               data-toolbar="#toolbar"
+                               data-search="true"
+                               data-show-columns="true"
+                               data-minimum-count-columns="2"
+                               data-pagination="true">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/assets/docs.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../js/assets/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

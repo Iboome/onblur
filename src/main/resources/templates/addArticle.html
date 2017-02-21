@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - Bootstrap3 Markdown编辑器</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/markdown/bootstrap-markdown.min.css" />
+    <link href="css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Markdown文本编辑器</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="form_editors.html#">选项1</a>
+                            </li>
+                            <li><a href="form_editors.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <div class="col-md-12">
+                                <label class="col-md-1">标题</label>
+                                <div class="col-md-11"><input type="text" class="form-control title" style="margin-top: -10px;" /></div>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <textarea name="content" class="content" data-provide="markdown" rows="10"></textarea>
+                            <div class="col-md-12"style="text-align: center;margin-top: 10px;">
+                                <input type="button" class="btn btn-info" style="margin-right: 30px;" value="提交"/>
+                                <input type="button" class="btn btn-warning" value="取消"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<script src="js/content.min.js?v=1.0.0"></script>
+<script type="text/javascript" src="js/markdown/markdown.js"></script>
+<script type="text/javascript" src="js/markdown/to-markdown.js"></script>
+<script type="text/javascript" src="js/markdown/bootstrap-markdown.js"></script>
+<script type="text/javascript" src="js/markdown/bootstrap-markdown.zh.js"></script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script>
+    $(function () {
+        $(".btn-warning").on("click",function () {
+            parent.closeLayer();
+        });
+
+        $(".btn-info").on("click",function () {
+            var title = $(".title").val();
+            var content = $(".content").val();
+//            $.post("/article?method=saveArticle",{"title":title,"content":content},function(data){
+//                var Data = eval('('+data+')');
+//                var result = Data.data;
+//                if(result=="success"){
+//                    parent.closeLayer();
+//                }else{
+//                    layer.msg("保存失败!",{icon:5});
+//                }
+//            });
+        })
+    });
+</script>
+</body>
+
+</html>
+</html>
