@@ -54,11 +54,13 @@ $(function () {
             sendName();
         }
     };
-    $("#barrage_switch").bind("click",function(){
-        var flag = $("#barrage_switch").is(':checked');
-        if(flag){
+    $("#barrage_switch").on("click",function(){
+        var flag = $("#barrage_switch").hasClass("btn-info");
+        if(! flag){
+            $("#barrage_switch").addClass("btn-info");
             connect();
         }else{
+            $("#barrage_switch").removeClass("btn-info");
             disconnect();
         }
     });

@@ -95,6 +95,19 @@
 //            });
         })
     });
+    function saveArticle(content){
+        var title = $(".title").val();
+        var content = content;
+        $.post("/article?method=saveArticle",{"title":title,"content":content},function(data){
+                var Data = eval('('+data+')');
+                var result = Data.data;
+                if(result=="success"){
+                    parent.closeLayer();
+                }else{
+                    layer.msg("保存失败!",{icon:5});
+                }
+            });
+    }
 </script>
 </body>
 

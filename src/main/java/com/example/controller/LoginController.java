@@ -45,4 +45,10 @@ public class LoginController {
     public String timeLine(){
         return "timeline";
     }
+
+    @RequestMapping("/about")
+    public String about(){
+        return "about";
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.model.Article;
 import com.example.repository.ArticleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,9 +21,13 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public String index(){
+        return "loadBlogHomePage";
+    }
 
     @RequestMapping("/list")
-    public String index(){
+    public String list(){
         return "articleList";
     }
 
@@ -51,5 +56,29 @@ public class ArticleController {
     @RequestMapping(params = "method=addArticle", method = RequestMethod.GET)
     public String addArticle(){
         return "addArticle";
+    }
+
+    @RequestMapping(params = "method=saveArticle",method = RequestMethod.POST)
+    @ResponseBody
+    public String saveArticle(HttpServletRequest request){
+        Article article = new Article();
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        article.setTitle(title);
+        article.setContent(content);
+
+
+        HashMap<String,Object> jsonMap = new HashMap<>();
+        jsonMap.put("data","success");
+        ObjectMapper mapper = new ObjectMapper();
+
+        try{
+            String json = mapper.writeValueAsString(jsonMap);
+            return json;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "wrong";
     }
 }

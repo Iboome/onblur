@@ -12,23 +12,3 @@
 .barrage-main {
     border: none;
 }
-
-.featurette-divider {
-    margin-top: 20px;
-    margin-bottom: 40px;
-}
-
-.onoffswitch-inner:before {
-    content: "弹幕";
-    padding-left: 7px;
-    background-color: #1AB394;
-    color: #FFF
-}
-
-.onoffswitch-inner:after {
-    content: "弹幕";
-    padding-right: 7px;
-    background-color: #FFF;
-    color: #919191;
-    text-align: right
-}

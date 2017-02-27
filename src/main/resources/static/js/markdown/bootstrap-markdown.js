@@ -896,6 +896,53 @@
             }
 
             return this
+        },
+        onSaveArticle : function () {
+            var container = this.$textarea,
+          //      afterContainer = container.next(),
+           //     replacementContainer = $('<div/>', {
+           //         'class': 'md-preview',
+           //         'data-provider': 'markdown-preview'
+           //     }),
+                content;
+
+            content = this.parseContent();
+
+            saveArticle(content);
+
+            // Build preview element
+           // replacementContainer.html(content);
+
+           // if (afterContainer && afterContainer.attr('class') == 'md-footer') {
+                // If there is footer element, insert the preview container before it
+           //     replacementContainer.insertBefore(afterContainer)
+           // } else {
+                // Otherwise, just append it after textarea
+                //container.parent().append(replacementContainer)
+                //console.log(content);
+           // }
+
+            // Set the preview element dimensions
+            // replacementContainer.css({
+            //     width: container.outerWidth() + 'px',
+            //     height: container.outerHeight() + 'px'
+            // })
+            //
+            // if (this.$options.resize) {
+            //     replacementContainer.css('resize', this.$options.resize)
+            // }
+
+
+            // Attach the editor instances
+          //  replacementContainer.data('markdown', this)
+
+
+            // if (this.$element.is(':disabled') || this.$element.is('[readonly]')) {
+            //     this.$editor.addClass('md-editor-disabled');
+            //     this.disableButtons('all');
+            // }
+            //
+            // return this
         }
 
     }
@@ -1335,7 +1382,17 @@
                             e.hidePreview()
                         }
                     }
-        }]
+        },{
+                    name: 'cmdSave',
+                    toggle: true,
+                    hotkey: 'Ctrl+S',
+                    title: 'Save',
+                    btnText: 'Save',
+                    btnClass: 'btn btn-sm',
+                    callback: function (e) {
+                        e.onSaveArticle();
+                    }
+                }]
       }]
     ],
         additionalButtons: [], // Place to hook more buttons by code
