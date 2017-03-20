@@ -2,11 +2,13 @@ package com.example.controller;
 
 import com.example.model.User;
 import com.example.repository.UserRepository;
+import com.example.util.MD5Encrypt;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+
+import static com.example.util.MD5Encrypt.md5EncodePassword;
 
 @Controller
 @RequestMapping("/user")
@@ -60,6 +64,7 @@ public class UserController {
         try{
         String account = request.getParameter("account");
         String token = request.getParameter("token");
+        token = md5EncodePassword(token, account);
         UUID uuid = UUID.randomUUID();
         User user = new User();
         user.setId(uuid.toString());
@@ -119,6 +124,7 @@ public class UserController {
         String id = request.getParameter("id");
         String token = request.getParameter("token");
         User user = userRepository.findUserById(id);
+        token = md5EncodePassword(token, user.getAccount());
         user.setToken(token);
         user.setUpdateTime(new Date().getTime());
         try{
@@ -152,6 +158,13 @@ public class UserController {
             e.printStackTrace();
         }
         return "wrong";
+    }
+
+    @RequestMapping(params = "method=findUser",method = {RequestMethod.POST, RequestMethod.GET})
+    @ResponseBody
+    public User findUser(){
+        User user = userRepository.findUser("ronger");
+        return user;
     }
 
 }

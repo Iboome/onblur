@@ -1,132 +1,404 @@
 <!DOCTYPE html>
-<!-- saved from url=(0041)http://v3.bootcss.com/examples/dashboard/ -->
 <html lang="zh-cn">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>博云网</title>
+    <title>Onblur7---致力于打造优秀技术分享社区</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/ronger/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/ronger/zabuto_calendar.css">
+    <link rel="stylesheet" type="text/css" href="css/gritter/jquery.gritter.css" />
+    <link rel="stylesheet" type="text/css" href="css/lineicons/style.css">
 
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/ronger/style.css" rel="stylesheet">
+    <link href="css/ronger/style-responsive.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <script src="js/assets/ie-emulation-modes-warning.js"></script>
+    <script src="js/ronger/Chart.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">博云网</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">文章</a></li>
-                    <li><a href="#">游戏</a></li>
-                    <li><a href="#">用户</a></li>
-                    <li><a href="#">设置</a></li>
-                </ul>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>
-            </div>
+
+<section id="container" >
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="切换导航"></div>
         </div>
-    </nav>
-</header>
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="/user">主页</a></li>
-                    <li><a href="/article/list">文章管理</a></li>
-                    <li><a href="/game/list">游戏管理</a></li>
-                    <li><a href="/user/list">用户管理</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">网站监控</h1>
-
-                <div class="row placeholders">
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="今日访问次数" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjxnPjx0ZXh0IHg9Ijc1LjUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6I0ZGRkZGRjtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjIwMHgyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                        <h4>流量</h4>
-                        <span class="text-muted">今日访问次数</span>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="今日新增用户数" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc1LjUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6IzFFMjkyQztmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjIwMHgyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                        <h4>用户</h4>
-                        <span class="text-muted">今日新增用户数</span>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="今日新增文章数" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjxnPjx0ZXh0IHg9Ijc1LjUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6I0ZGRkZGRjtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjIwMHgyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                        <h4>文章</h4>
-                        <span class="text-muted">今日新增文章数</span>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="今日新增游戏数" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc1LjUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6IzFFMjkyQztmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjIwMHgyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                        <h4>游戏</h4>
-                        <span class="text-muted">今日新增游戏数</span>
-                    </div>
-                </div>
-
-                <h2 class="sub-header">动态列表</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>标题</th>
-                            <th>作者</th>
-                            <th>栏目</th>
-                            <th>发布时间</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1,001</td>
-                            <td>Lorem</td>
-                            <td>ipsum</td>
-                            <td>dolor</td>
-                            <td>sit</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <!--logo start-->
+        <a href="/user" class="logo"><b>ONBLUR 7</b></a>
+        <!--logo end-->
+        <div class="nav notify-row" id="top_menu">
+            <!--  notification start -->
+            <ul class="nav top-menu">
+                <!-- settings start -->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="/user">
+                        <i class="fa fa-tasks"></i>
+                        <span class="badge bg-theme">4</span>
+                    </a>
+                    <ul class="dropdown-menu extended tasks-bar">
+                        <div class="notify-arrow notify-arrow-green"></div>
+                        <li>
+                            <p class="green">You have 4 pending tasks</p>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <div class="task-info">
+                                    <div class="desc">DashGum Admin Panel</div>
+                                    <div class="percent">40%</div>
+                                </div>
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                        <span class="sr-only">40% Complete (success)</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <div class="task-info">
+                                    <div class="desc">Database Update</div>
+                                    <div class="percent">60%</div>
+                                </div>
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (warning)</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <div class="task-info">
+                                    <div class="desc">Product Development</div>
+                                    <div class="percent">80%</div>
+                                </div>
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                        <span class="sr-only">80% Complete</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <div class="task-info">
+                                    <div class="desc">Payments Sent</div>
+                                    <div class="percent">70%</div>
+                                </div>
+                                <div class="progress progress-striped">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                        <span class="sr-only">70% Complete (Important)</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="external">
+                            <a href="#">See All Tasks</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- settings end -->
+                <!-- inbox dropdown start-->
+                <li id="header_inbox_bar" class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="/user">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-theme">5</span>
+                    </a>
+                    <ul class="dropdown-menu extended inbox">
+                        <div class="notify-arrow notify-arrow-green"></div>
+                        <li>
+                            <p class="green">You have 5 new messages</p>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Zac Snider</span>
+                                    <span class="time">Just now</span>
+                                    </span>
+                                <span class="message">
+                                        Hi mate, how is everything?
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Divya Manian</span>
+                                    <span class="time">40 mins.</span>
+                                    </span>
+                                <span class="message">
+                                     Hi, I need your help with this.
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Dan Rogers</span>
+                                    <span class="time">2 hrs.</span>
+                                    </span>
+                                <span class="message">
+                                        Love your new Dashboard.
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Dj Sherman</span>
+                                    <span class="time">4 hrs.</span>
+                                    </span>
+                                <span class="message">
+                                        Please, answer asap.
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/user">See all messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- inbox dropdown end -->
+            </ul>
+            <!--  notification end -->
         </div>
-    </div>
-</main>
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="login.html">退出</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/assets/docs.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="js/assets/ie10-viewport-bug-workaround.js"></script>
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+
+                <p class="centered"><a href="profile.html"><img src="images/ronger/logo.png" class="img-circle" width="60"></a></p>
+                <h5 class="centered">Ronger</h5>
+
+                <li class="mt">
+                    <a class="active menu-desktop" href="/test">
+                        <i class="fa fa-dashboard"></i>
+                        <span>数据监控</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" class="menu-desktop" >
+                        <i class="fa fa-desktop"></i>
+                        <span>用户管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="/user/list">用户列表</a></li>
+                        <li><a  href="buttons.html">用户权限</a></li>
+                        <li><a  href="panels.html">用户数据</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="/article?method=addArticle" class="menu-desktop">
+                        <i class="fa fa-dashboard"></i>
+                        <span>发表文章</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;" class="menu-desktop" >
+                        <i class="fa fa-cogs"></i>
+                        <span>文章管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="calendar.html">我的文章</a></li>
+                        <li><a  href="/article/list">文章列表</a></li>
+                        <li><a  href="todo_list.html">文章数据</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="menu-desktop" >
+                        <i class="fa fa-book"></i>
+                        <span>作者管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="blank.html">作者列表</a></li>
+                        <li><a  href="login.html">作者数据</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="menu-desktop" >
+                        <i class="fa fa-tasks"></i>
+                        <span>标签管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="basic_table.html">标签维护</a></li>
+                        <li><a  href="responsive_table.html">标签数据</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="menu-desktop" >
+                        <i class="fa fa-th"></i>
+                        <span>分类管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="basic_table.html">分类维护</a></li>
+                        <li><a  href="responsive_table.html">分类数据</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="menu-desktop" >
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>项目管理</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="morris.html">我的待办</a></li>
+                        <li><a  href="chartjs.html">我的项目</a></li>
+                        <li><a  href="morris.html">项目列表</a></li>
+                        <li><a  href="chartjs.html">项目数据</a></li>
+                    </ul>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;" class="menu-desktop" >
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>消息中心</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="morris.html">我的消息</a></li>
+                        <li><a  href="chartjs.html">系统消息</a></li>
+                        <li><a  href="morris.html">意见反馈</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+    </section>
+
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+        <div class="text-center">
+            2017 - Onblur 7
+            <a href="/user" class="go-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+        </div>
+    </footer>
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="js/ronger/jquery.js"></script>
+<script src="js/ronger/jquery-1.8.3.min.js"></script>
+<script src="js/ronger/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="js/ronger/jquery.dcjqaccordion.2.7.js"></script>
+<script src="js/ronger/jquery.scrollTo.min.js"></script>
+<script src="js/ronger/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="js/ronger/jquery.sparkline.js"></script>
+
+
+<!--common script for all pages-->
+<script src="js/ronger/common-scripts.js"></script>
+
+<script type="text/javascript" src="js/gritter/jquery.gritter.js"></script>
+<script type="text/javascript" src="js/ronger/gritter-conf.js"></script>
+
+<!--script for this page-->
+<script src="js/ronger/dashgum-ronger.js"></script>
+
+<script type="text/javascript">
+//    $(document).ready(function () {
+//        var unique_id = $.gritter.add({
+//            // (string | mandatory) the heading of the notification
+//            title: 'Welcome to Dashgum!',
+//            // (string | mandatory) the text inside the notification
+//            text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo. Free version for <a href="http://blacktie.co" target="_blank" style="color:#ffd777">BlackTie.co</a>.',
+//            // (string | optional) the image to display on the left
+//            image: 'assets/img/ui-sam.jpg',
+//            // (bool | optional) if you want it to fade out on its own or just sit there
+//            sticky: true,
+//            // (int | optional) the time you want it to be alive for before fading out
+//            time: '',
+//            // (string | optional) the class name you want to apply to that specific message
+//            class_name: 'my-sticky-class'
+//        });
+//
+//        return false;
+//    });
+</script>
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#main-content").load("/test");
+        $("#date-popover").popover({html: true, trigger: "manual"});
+        $("#date-popover").hide();
+        $("#date-popover").click(function (e) {
+            $(this).hide();
+        });
+
+        $("#my-calendar").zabuto_calendar({
+            action: function () {
+                return myDateFunction(this.id, false);
+            },
+            action_nav: function () {
+                return myNavFunction(this.id);
+            },
+            ajax: {
+                url: "show_data.php?action=1",
+                modal: true
+            },
+            legend: [
+                {type: "text", label: "Special event", badge: "00"},
+                {type: "block", label: "Regular event", }
+            ]
+        });
+    });
+
+
+    function myNavFunction(id) {
+        $("#date-popover").hide();
+        var nav = $("#" + id).data("navigation");
+        var to = $("#" + id).data("to");
+        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+</script>
+
+
 </body>
 </html>

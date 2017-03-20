@@ -16,9 +16,9 @@ public class LoginController {
         return "index";
     }
 
-    @RequestMapping("/login")
-    public String login(){
-        return "login";
+    @RequestMapping("/index")
+    public String indexs(){
+        return "index";
     }
 
     @RequestMapping("/barrage")
@@ -49,6 +49,11 @@ public class LoginController {
     @RequestMapping("/about")
     public String about(){
         return "about";
+    }
+
+    @RequestMapping("/test")
+    public String test(){
+        return "indexModular";
     }
 
 }
